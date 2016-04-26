@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/docker/machine/libmachine"
 	"github.com/docker/machine/libmachine/log"
@@ -24,7 +23,7 @@ func init() {
 // ListCmd list all the machines available
 func ListCmd(cmd *cobra.Command, args []string) {
 	// needs export=docker-machine-vm-base-path
-	machinePath := os.Getenv("docker_machine_dir")
+
 	client := libmachine.NewClient(machinePath, machinePath)
 	defer client.Close()
 
