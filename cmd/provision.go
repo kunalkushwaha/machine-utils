@@ -1,12 +1,9 @@
 package cmd
 
-import (
-	//	"fmt"
-	"os"
+import
+//	"fmt"
 
-	"github.com/docker/machine/libmachine/drivers/plugin/localbinary"
-	"github.com/spf13/cobra"
-)
+"github.com/spf13/cobra"
 
 // provisionCmd represents the provision command
 var provisionCmd = &cobra.Command{
@@ -24,5 +21,6 @@ func init() {
 
 }
 
+// ProvisionCmd provision's as per config file.
 func ProvisionCmd(cmd *cobra.Command, args []string) {
 }
