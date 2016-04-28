@@ -22,7 +22,6 @@ func init() {
 
 // ListCmd list all the machines available
 func ListCmd(cmd *cobra.Command, args []string) {
-	// needs export=docker-machine-vm-base-path
 
 	client := libmachine.NewClient(machinePath, machinePath)
 	defer client.Close()
