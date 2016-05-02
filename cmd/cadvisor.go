@@ -17,7 +17,7 @@ var cAdvisorTemplateCmd = `sudo docker run \
   --publish=8080:8080 \
   --detach=true \
   --name=cadvisor \
-	--restart=alays \
+	--restart=always \
   google/cadvisor:latest`
 
 // cadvisorCmd represents the cadvisor command
