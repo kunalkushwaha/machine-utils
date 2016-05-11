@@ -13,18 +13,24 @@ type osdConfig struct {
 	Osd `yaml:"osd"`
 }
 
+// Osd struct
 type Osd struct {
 	Drivers `yaml:"drivers"`
 }
 
+// Drivers struct
 type Drivers struct {
 	Nfs `yaml:"nfs"`
-	Aws `yaml:"aws"`
+	//	Aws `yaml:"aws"`
 }
+
+// Nfs struct
 type Nfs struct {
 	Server string `yaml:"server"`
 	Path   string `yaml:"path"`
 }
+
+// Aws struct
 type Aws struct {
 	AwsAccessKeyID     string `yaml:"aws_access_key_id"`
 	AWSSecretAccessKey string `yaml:"aws_secret_access_key"`
@@ -36,8 +42,10 @@ docker run \
 		-d \
 		-v /home/docker:/etc \
 		-v /run/docker/plugins:/run/docker/plugins \
+		-v /var/lib/openstorage:/var/lib/openstorage \
 		-v /var/lib/osd/:/var/lib/osd/ \
 		-p 2345:2345 \
+		--restart always \
 		openstorage/osd -d -f /etc/config.yaml
 `
 
@@ -87,8 +95,6 @@ func StorageCmd(cmd *cobra.Command, args []string) {
 		log.Error(err)
 	}
 
-	//	basePath := filepath.Join(mcndirs.GetMachineDir(), machine)
-
 	config := osdConfig{}
 	config.Nfs.Server = nfsIP
 	config.Nfs.Path = nfsPath
@@ -103,6 +109,7 @@ func StorageCmd(cmd *cobra.Command, args []string) {
 		fmt.Println("Something wrong at config file creation!")
 		return
 	}
+
 	_, err = h.RunSSHCommand(osdCommand)
 	if err != nil {
 		fmt.Println(err)

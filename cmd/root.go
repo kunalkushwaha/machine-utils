@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/docker/machine/commands/mcndirs"
 	"github.com/spf13/cobra"
 )
 
@@ -37,4 +38,8 @@ func init() {
 // initConfig reads in config file and ENV variables if set.
 func initConfig() {
 	machinePath = os.Getenv("docker_machine_dir")
+	if machinePath == "" {
+		machinePath = mcndirs.GetBaseDir()
+	}
+	fmt.Println(machinePath)
 }
